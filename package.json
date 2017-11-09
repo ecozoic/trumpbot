@@ -12,7 +12,6 @@
   "dependencies": {
     "dotenv": "^4.0.0",
     "lodash": "^4.17.4",
-    "prompt": "^1.0.0",
     "rita": "^1.2.12",
     "twit": "^2.2.9"
   }
