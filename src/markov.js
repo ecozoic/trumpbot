@@ -3,25 +3,19 @@ const RiTa = require('rita');
 // increase this number to make the markov chain more strict (adhere more closely to source)
 const rm = new RiTa.RiMarkov(3);
 
+const removeMentions = word => !word.startsWith('@');
+const removeUrls = word => !word.match(/[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi);
+
 const parseTweet = tweet =>
     tweet.replace(/\&amp\;/gi, '&')
         .split(' ')
-        .filter(word => !word.startsWith('@'))
-        .filter(
-            word =>
-                !word.match(
-                    /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi
-                )
-        )
+        .filter(removeMentions)
+        .filter(removeUrls)
         .join(' ')
-        // .replace(/([\.,:;!\+&]+)/gi, ' $1 ')
         .replace(/\s+/gi, ' ')
-        // .split(' ')
-        // .filter(word => !!word)
-        // .join(' ');
 
 const genTweet = () => {
-    const tweet = rm.generateSentences(2).join(' ');
+    const tweet = rm.generateSentences(3).join(' ');
 
     if (tweet.length > 140) {
         return genTweet();
