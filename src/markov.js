@@ -14,11 +14,11 @@ const parseTweet = tweet =>
                 )
         )
         .join(' ')
-        .replace(/([\.,:;!\+&]+)/gi, ' $1 ')
+        // .replace(/([\.,:;!\+&]+)/gi, ' $1 ')
         .replace(/\s+/gi, ' ')
-        .split(' ')
-        .filter(word => !!word)
-        .join(' ');
+        // .split(' ')
+        // .filter(word => !!word)
+        // .join(' ');
 
 const genTweet = () => {
     const tweet = rm.generateSentences(2).join(' ');
